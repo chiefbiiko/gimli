@@ -1,9 +1,7 @@
 (module
   (func $print (import "imports" "print") (param i32))
-  (func $space (import "imports" "space"))
 
   (memory (export "memory") 1 1)
-  ;; (memory (import "imports" "memory") 1)
 
   (func (export "gimli") (param $ptr i32)
     (local $a i32)
@@ -41,13 +39,9 @@
     ;; TRY
 
     (call $print (get_local $a))
-    (call $space)
     (call $print (get_local $b))
-    (call $space)
     (call $print (get_local $c))
-    (call $space)
     (call $print (get_local $d))
-    (call $space)
     (call $print (get_local $e))
     (unreachable)
 

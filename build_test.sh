@@ -9,7 +9,7 @@ rm -f ./gimli.wasm
 wat2wasm ./gimli.wat -o ./gimli.wasm
 
 # b64 encoding
-b64wasm=$(base64 ./gimli.wasm)
+b64wasm=$(base64 ./gimli.wasm | tr -d '\t\r\n')
 
 # counting
 b64line=$(cat loadWasm.ts | grep -n AGFzbQ | cut -f1 -d:)
