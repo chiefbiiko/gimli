@@ -9,22 +9,22 @@ rm -f ./gimli.wasm
 wat2wasm ./gimli.wat -o ./gimli.wasm
 
 # b64 encoding
-b64wasm=$(base64 ./gimli.wasm | tr -d '\t\r\n')
+b64_wasm=$(base64 ./gimli.wasm | tr -d '\t\r\n')
 
 # counting
-b64line=$(cat loadWasm.ts | grep -n AGFzbQ | cut -f1 -d:)
+b64_line=$(cat ./loadWasm.ts | grep -n AGFzbQ | cut -f1 -d:)
 
 # heading
-loadHead=$(head -n $(($b64line - 1)) loadWasm.ts)
+load_wasm_head=$(head -n $(($b64_line - 1)) ./loadWasm.ts)
 
 # tailing
-loadTail=$(tail -n +$(($b64line + 1)) loadWasm.ts)
+load_wasm_tail=$(tail -n +$(($b64_line + 1)) ./loadWasm.ts)
 
 # assembling
-loadWasm="$loadHead\n    \"$b64wasm\"\n$loadTail"
+load_wasm="$load_wasm_head\n    \"$b64_wasm\"\n$load_wasm_tail"
 
 # writing
-echo -e "$loadWasm" > ./loadWasm.ts
+echo -e "$load_wasm" > ./loadWasm.ts
 
 # testing
-deno run --allow-read --reload ./test.ts
+$HOME/.deno/bin/deno run --allow-read --reload ./test.ts
